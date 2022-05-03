@@ -708,11 +708,11 @@ svg:not(:root) {
    ========================================================================== */
 /**
  * Address differences between Firefox and other browsers.
- */
+ *//*
 hr {
   box-sizing: content-box;
   height: 0;
-}
+}*/
 
 /**
  * Contain overflow in all browsers.
@@ -1954,7 +1954,6 @@ hr {
   height: 1px;
   min-height: 0;
   margin: 20px 0;
-  border-top: 1px solid #e9e9e9;
   border-right: 0;
   border-bottom: 0;
   border-left: 0;
@@ -10249,7 +10248,14 @@ img.mfp-img {
   }
 }
 
-
+.floating{
+  position: absolute;
+  width: 963px;
+  height: 795px;
+  opacity: 0.4;
+  right: 250px;
+  z-index: -2;
+}
 
 body{
   background-color: #0C1526;
@@ -10259,8 +10265,46 @@ footer{
   background-color: #252B39;
 }
 
-.blog-post{
-  border-left: 2px solid #02C2FF;
+.principal{
+  margin: 0 20px;
+}
+
+.principal h1{
+  color: #ffffff;
+  font-weight: 200;
+  font-size: 5em;
+  letter-spacing: 4px;
+}
+
+.principal small{
+  font-weight: bold;
+}
+
+.animated{
+  color: #FFF;
+  font-size: 1.2em;
+  letter-spacing: 4px;
+}
+
+.blinking-cursor {
+  user-select: none;
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.short{
+  margin-top: 20px;
+  color: #ffffff;
+  text-align: left;
+  width: 75%;
+}
+
+.bio-image{
+  margin: auto;
 }
 
 .card{
@@ -10285,11 +10329,29 @@ footer{
 hr {
   opacity: 0.9;
   border: 1px;
-  height: 5px;
+  height: 2px  !important;
   background: #02C2FF;
+}
+
+.description{
+  display: flex;
+    align-items: center;
+}
+
+.first {
+  margin: auto;
+  margin: 0 5px;
+  opacity: 1;
+  border: 1px;
+  padding: 0 5px;
+  height: 5px !important;
 }
 
 footer{
   margin-top: 10px;
   padding: 10px 0px;
+}
+
+.nav-pills .nav-link.active{
+  background-color: #02C2FF;
 }
