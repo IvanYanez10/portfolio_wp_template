@@ -4859,4 +4859,10 @@ function subetuwebwp_body_content() {
 add_action( 'subetuwebwp_body_content', 'subetuwebwp_body_content' );
 
 
+function subetuwebwp_portfolio_data() {
 
+	get_template_part( 'assets/epanel/portfolio' );
+
+}
+
+add_action( 'subetuwebwp_portfolio_data', 'subetuwebwp_portfolio_data' );
