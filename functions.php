@@ -1120,19 +1120,19 @@ function add_menu_link_class($classes, $item, $args) {
 }
 
 add_filter( 'nav_menu_css_class', 'add_menu_link_class', 1, 3 );
-
+/*
 function add_menu() {
 
 	add_menu_page( 'Portfolio', 'Portfolio', 'edit_pages', 'portfolio', 'subetuwebwp_portfolio_data', null, 25 );
 
-	add_theme_page( 'page', 'menu title', 'edit_pages', 'portfolio', 'subetuwebwp_portfolio_data');/*
+	add_theme_page( 'page', 'menu title', 'edit_pages', 'portfolio', 'subetuwebwp_portfolio_data');
 
 	add_submenu_page( 'slug-tag', 'Item 1', 'Item 1', 'edit_pages', 'slug-1', 'theme_option_page2' );
 
-	add_submenu_page( 'slug-tag', 'Item 2', 'Item 2', 'edit_pages', 'slug-2', 'theme_option_page2' );*/
+	add_submenu_page( 'slug-tag', 'Item 2', 'Item 2', 'edit_pages', 'slug-2', 'theme_option_page2' );
 
 }
 
 add_action('admin_menu', 'add_menu');
-
+*/
 new subetuwebWP_Theme_Class();
