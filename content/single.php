@@ -39,9 +39,17 @@
     <img class="align-self-center bio-image" src="http://localhost/wp-template-test/wp-content/uploads/2022/05/me-01.png" width=350 alt="pic">      
   </div>
 
-  <div class="col-2"> <!-- top left -->
-    <div>
-      <p>Services</p>
+  <div class="col-3 services-col">
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-8">
+          <div class="card-body">
+            <h5 class="card-title">Servicios</h5>
+            <p class="card-text">Let's build quality products in programming</p>
+            <a href="#" class="services-a">Show more <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -49,9 +57,39 @@
 
 <!-- services and blog -->
 <div class="row mx-5">
-    <div class="col-9 px-5">
-      One of three columns
+
+
+    <div class="col-9 px-5 ">
+
+      <div class="row mx-3 service">
+        <?php 
+        include 'services.php';
+        $services_array=array_slice($services_array, 0, 6);
+        foreach ( $services_array as $service ) :?>
+
+          <div class="col-md-4"><div class="card text-white card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech');">
+            <img class="card-img d-none" src="#">
+            <div class="card-img-overlay d-flex flex-column">
+              <div class="card-body">
+                <small class="card-meta mb-2"><?= $service['tag'] ?></small>
+                <h4 class="card-title mt-0 "><a class="text-white" herf="<?php $service['serviceUrl'] ?>"><?= $service['service'] ?></a></h4>
+                <small><?= substr($service['description'], 0, 50) ?></small>
+              </div>
+              <div class="card-footer">
+                <a href="<?php $service['serviceUrl'] ?>" class="services-a">Show more <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+      </div>
+
+        <?php
+        endforeach; 
+        ?>
+      </div>
+      
     </div>
+
+
     <div class="col-3 px-5 blog-post">
       <?php
       $lastposts = get_posts( array(
