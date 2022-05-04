@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 do_action( 'subetuweb_before_header' ); ?>
 
-<header id="site-header" class="px-5">
+<header id="site-header" class="">
 
 	<?php do_action( 'subetuweb_header_inner_middle_content' ); ?>
 

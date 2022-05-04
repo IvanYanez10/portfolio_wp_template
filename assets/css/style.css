@@ -10253,6 +10253,10 @@ img.mfp-img {
   margin: 0 50px;
 }
 
+header{
+  padding: 0 50px;
+}
+
 .floating{
   position: absolute;
   width: 963px;

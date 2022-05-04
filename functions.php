@@ -55,10 +55,7 @@ final class subetuwebWP_Theme_Class {
 
 		// Setup theme => Generate the custom CSS file.
 		add_action( 'admin_bar_init', array( 'subetuwebWP_Theme_Class', 'save_customizer_css_in_file' ), 9999 );
-
-		// register sidebar widget areas.
-		add_action( 'widgets_init', array( 'subetuwebWP_Theme_Class', 'register_sidebars' ) );
-
+		
 		// Registers theme_mod strings into Polylang.
 		if ( class_exists( 'Polylang' ) ) {
 			add_action( 'after_setup_theme', array( 'subetuwebWP_Theme_Class', 'polylang_register_string' ) );
@@ -119,12 +116,6 @@ final class subetuwebWP_Theme_Class {
 
 			// Add schema markup to the authors post link.
 			add_filter( 'the_author_posts_link', array( 'subetuwebWP_Theme_Class', 'the_author_posts_link' ) );
-
-			// Add support for Elementor Pro locations.
-			add_action( 'elementor/theme/register_locations', array( 'subetuwebWP_Theme_Class', 'register_elementor_locations' ) );
-
-			// Remove the default lightbox script for the beaver builder plugin.
-			add_filter( 'fl_builder_override_lightbox', array( 'subetuwebWP_Theme_Class', 'remove_bb_lightbox' ) );
 
 			add_filter( 'subetuweb_enqueue_generated_files', '__return_false' );
 		}
@@ -410,16 +401,6 @@ final class subetuwebWP_Theme_Class {
 		wp_deregister_style( 'font-awesome' );
 		wp_deregister_style( 'fontawesome' );
 
-		// Enqueue font awesome style.
-		if ( get_theme_mod( 'subetuweb_performance_fontawesome', 'enabled' ) === 'enabled' ) {
-			wp_enqueue_style( 'font-awesome', subetuwebWP_THEME_URI . '/assets/fonts/fontawesome/css/all.min.css', false, '5.15.1' );
-		}
-
-		// Enqueue simple line icons style.
-		if ( get_theme_mod( 'subetuweb_performance_simple_line_icons', 'enabled' ) === 'enabled' ) {
-			wp_enqueue_style( 'simple-line-icons', $dir . 'third/simple-line-icons.min.css', false, '2.4.0' );
-		}
-
 		// Enqueue Main style.
 		wp_enqueue_style( 'subetuwebwp-style', $dir . 'style.css', false, $theme_version );
 
@@ -633,9 +614,6 @@ final class subetuwebWP_Theme_Class {
 		$array       = array(
 			'nonce'                 => wp_create_nonce( 'subetuwebwp' ),
 			'isRTL'                 => is_rtl(),
-			'menuSearchStyle'       => subetuwebwp_menu_search_style(),
-			'mobileMenuSearchStyle' => subetuwebwp_mobile_menu_search_style(),
-			'sidrSource'            => subetuwebwp_sidr_menu_source(),
 			'sidrDisplace'          => get_theme_mod( 'subetuweb_mobile_menu_sidr_displace', true ) ? true : false,
 			'sidrSide'              => $sidr_side,
 			'sidrDropdownTarget'    => $sidr_target,
@@ -674,113 +652,7 @@ final class subetuwebWP_Theme_Class {
 		wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
 	}
 
-	/**
-	 * Registers sidebars
-	 *
-	 * @since   1.0.0
-	 */
-	public static function register_sidebars() {
 
-		$heading = get_theme_mod( 'subetuweb_sidebar_widget_heading_tag', 'h4' );
-		$heading = apply_filters( 'subetuweb_sidebar_widget_heading_tag', $heading );
-
-		$foo_heading = get_theme_mod( 'subetuweb_footer_widget_heading_tag', 'h4' );
-		$foo_heading = apply_filters( 'subetuweb_footer_widget_heading_tag', $foo_heading );
-
-		// Default Sidebar.
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Default Sidebar', 'subetuwebwp' ),
-				'id'            => 'sidebar',
-				'description'   => esc_html__( 'Widgets in this area will be displayed in the left or right sidebar area if you choose the Left or Right Sidebar layout.', 'subetuwebwp' ),
-				'before_widget' => '<div id="%1$s" class="sidebar-box %2$s clr">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<' . $heading . ' class="widget-title">',
-				'after_title'   => '</' . $heading . '>',
-			)
-		);
-
-		// Left Sidebar.
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Left Sidebar', 'subetuwebwp' ),
-				'id'            => 'sidebar-2',
-				'description'   => esc_html__( 'Widgets in this area are used in the left sidebar region if you use the Both Sidebars layout.', 'subetuwebwp' ),
-				'before_widget' => '<div id="%1$s" class="sidebar-box %2$s clr">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<' . $heading . ' class="widget-title">',
-				'after_title'   => '</' . $heading . '>',
-			)
-		);
-
-		// Search Results Sidebar.
-		if ( get_theme_mod( 'subetuweb_search_custom_sidebar', true ) ) {
-			register_sidebar(
-				array(
-					'name'          => esc_html__( 'Search Results Sidebar', 'subetuwebwp' ),
-					'id'            => 'search_sidebar',
-					'description'   => esc_html__( 'Widgets in this area are used in the search result page.', 'subetuwebwp' ),
-					'before_widget' => '<div id="%1$s" class="sidebar-box %2$s clr">',
-					'after_widget'  => '</div>',
-					'before_title'  => '<' . $heading . ' class="widget-title">',
-					'after_title'   => '</' . $heading . '>',
-				)
-			);
-		}
-
-		// Footer 1.
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Footer 1', 'subetuwebwp' ),
-				'id'            => 'footer-one',
-				'description'   => esc_html__( 'Widgets in this area are used in the first footer region.', 'subetuwebwp' ),
-				'before_widget' => '<div id="%1$s" class="footer-widget %2$s clr">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<' . $foo_heading . ' class="widget-title">',
-				'after_title'   => '</' . $foo_heading . '>',
-			)
-		);
-
-		// Footer 2.
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Footer 2', 'subetuwebwp' ),
-				'id'            => 'footer-two',
-				'description'   => esc_html__( 'Widgets in this area are used in the second footer region.', 'subetuwebwp' ),
-				'before_widget' => '<div id="%1$s" class="footer-widget %2$s clr">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<' . $foo_heading . ' class="widget-title">',
-				'after_title'   => '</' . $foo_heading . '>',
-			)
-		);
-
-		// Footer 3.
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Footer 3', 'subetuwebwp' ),
-				'id'            => 'footer-three',
-				'description'   => esc_html__( 'Widgets in this area are used in the third footer region.', 'subetuwebwp' ),
-				'before_widget' => '<div id="%1$s" class="footer-widget %2$s clr">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<' . $foo_heading . ' class="widget-title">',
-				'after_title'   => '</' . $foo_heading . '>',
-			)
-		);
-
-		// Footer 4.
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Footer 4', 'subetuwebwp' ),
-				'id'            => 'footer-four',
-				'description'   => esc_html__( 'Widgets in this area are used in the fourth footer region.', 'subetuwebwp' ),
-				'before_widget' => '<div id="%1$s" class="footer-widget %2$s clr">',
-				'after_widget'  => '</div>',
-				'before_title'  => '<' . $foo_heading . ' class="widget-title">',
-				'after_title'   => '</' . $foo_heading . '>',
-			)
-		);
-
-	}
 
 	/**
 	 * Registers theme_mod strings into Polylang.
@@ -1084,16 +956,6 @@ final class subetuwebWP_Theme_Class {
 	}
 
 	/**
-	 * Add support for Elementor Pro locations
-	 *
-	 * @param obj $elementor_theme_manager    Elementor Instance.
-	 * @since 1.5.6
-	 */
-	public static function register_elementor_locations( $elementor_theme_manager ) {
-		$elementor_theme_manager->register_all_core_location();
-	}
-
-	/**
 	 * Add schema markup to the authors post link
 	 *
 	 * @since 1.1.5
@@ -1120,19 +982,5 @@ function add_menu_link_class($classes, $item, $args) {
 }
 
 add_filter( 'nav_menu_css_class', 'add_menu_link_class', 1, 3 );
-/*
-function add_menu() {
 
-	add_menu_page( 'Portfolio', 'Portfolio', 'edit_pages', 'portfolio', 'subetuwebwp_portfolio_data', null, 25 );
-
-	add_theme_page( 'page', 'menu title', 'edit_pages', 'portfolio', 'subetuwebwp_portfolio_data');
-
-	add_submenu_page( 'slug-tag', 'Item 1', 'Item 1', 'edit_pages', 'slug-1', 'theme_option_page2' );
-
-	add_submenu_page( 'slug-tag', 'Item 2', 'Item 2', 'edit_pages', 'slug-2', 'theme_option_page2' );
-
-}
-
-add_action('admin_menu', 'add_menu');
-*/
 new subetuwebWP_Theme_Class();

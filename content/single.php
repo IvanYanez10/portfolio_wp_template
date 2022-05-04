@@ -1,8 +1,12 @@
 <!-- user can change route by customizer -->
-<?php $image_attributes = wp_get_attachment_image_src( $attachment_id = 679 );
+
+
+<?php 
+$image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png";
+/*$image_attributes = wp_get_attachment_image_src( $attachment_id = 679 );
   if ( $image_attributes ) : 
     $image= $image_attributes[0];
-  endif;
+  endif;*/
 ?> 
 
 <!-- floating image -->
@@ -36,7 +40,7 @@
   </div>
 
   <div class="col d-flex align-items-center ">
-    <img class="align-self-center bio-image" src="http://localhost/wp-template-test/wp-content/uploads/2022/05/me-01.png" width=350 alt="pic">      
+    <img class="align-self-center bio-image" src="https://ivanyz.com/wp-content/uploads/2022/05/me-01.png" width=350 alt="pic">      
   </div>
 
   <div class="col-3 services-col">
