@@ -9,7 +9,7 @@
 <img class="floating" src="<?= $image ?>">
 
 <!--  -->
-<div class="row principal" style="height:600px; ">
+<div class="row principal" id="home" style="height:600px; ">
 
   <div class="col-3 text-left">
     <h1>
@@ -56,10 +56,9 @@
 </div>
 
 <!-- services and blog -->
-<div class="row mx-5">
+<div class="row mx-5" id="services">
 
-
-    <div class="col-9 px-2 ">
+    <div class="col-9 px-2 serv">
 
       <div class="row mx-2 service">
         <?php 
@@ -90,7 +89,7 @@
     </div>
 
 
-    <div class="col-3 px-5 blog-post">
+    <div class="col-3 px-5 blog-post" >
       <?php
       $lastposts = get_posts( array(
           'posts_per_page' => 6
@@ -130,12 +129,111 @@
   </div>
 </div>
 
-<div class="col container"  style="height:600px;">
-    <p>Portfolio</p>
+<!-- portfolio -->
+<div class="col container" id="portfolio" style="height:900px;">    
+  <div class="portfolio">
+    <h1>My best selected portfolio</h1>
+  
+  <!-- Card Start -->
+  <div class="card">
+    <div class="row">
+
+      <div class="col-md-7 px-3">
+        <div class="card-block px-6">
+          <h4 class="card-title">Top </h4>
+          <p class="card-text">
+            The Carousel code can be replaced with an img src, no problem. The added CSS brings shadow to the card and some adjustments to the prev/next buttons and the indicators is rounded now. As in Bootstrap 3
+          </p>
+          <p class="card-text">Made for usage, commonly searched for. Fork, like and use it. Just move the carousel div above the col containing the text for left alignment of images</p>
+          <br>
+          <a href="<?php $service['serviceUrl'] ?>" class="services-a">Go <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <!-- Carousel start -->
+      <div class="col-md-5">
+        <div id="CarouselTest" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#CarouselTest" data-slide-to="0" class="active"></li>
+            <li data-target="#CarouselTest" data-slide-to="1"></li>
+            <li data-target="#CarouselTest" data-slide-to="2"></li>
+
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block" src="https://picsum.photos/450/300?image=1072" alt="">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block" src="https://picsum.photos/450/300?image=855" alt="">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block" src="https://picsum.photos/450/300?image=355" alt="">
+            </div>
+            <a class="carousel-control-prev" href="#CarouselTest" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#CarouselTest" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col px-2 mt-4">
+
+    <div class="row portfolio">
+      <?php 
+      include 'portfolio.php';
+      $portfolio_array=array_slice($portfolio_array, 0, 3);
+      foreach ( $portfolio_array as $portfolio_item ) :?>
+
+        <div class="col-md-4"><div class="card text-white card-has-bg click-col">
+          
+          <div class="card-img-overlay d-flex flex-column">
+            <div class="card-body">
+              <small class="card-meta mb-2"><?= $portfolio_item['tag'] ?></small>
+              <div class="row justify-content-between">
+                <h3 class="card-title mt-0 col-10"><?= $portfolio_item['portfolio'] ?></h3>
+                <a class="col-2" href="<?php $portfolio_item['portfolioUrl'] ?>" class="portfolio-a">Go<i class="fa-solid fa-arrow-right"></i></a>
+              </div>              
+              <img class="card-img" src="https://source.unsplash.com/600x900/?tech">
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <?php
+    endforeach; 
+    ?>
+    </div>
+      
+  </div>
+
+  </div>
 </div>
 
-<div class="col container"  style="height:400px;">
-   <p>Acerca</p>
+<div class="container" id="about" style="height:400px;">
+  <div class="row about">
+      <div class="col-8">
+        <h1>About me</h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
+        industry. Lorem Ipsum has been the industry's standard dummy text
+        ever since the 1500s, when an unknown printer took a galley of type
+        and scrambled it to make a type specimen book. It has survived not 
+        only five centuries, but also the leap into electronic typesetting, 
+        remaining essentially unchanged. It was popularised in the 1960s 
+        with the release of Letraset sheets containing Lorem Ipsum passages, 
+        and more recently with desktop publishing software like Aldus 
+        PageMaker including versions of Lorem Ipsum.</p>
+      </div>
+      <div class="col-1">
+        
+      </div>
+  </div>
 </div>
 
 <script>
@@ -163,31 +261,31 @@
     }
   }
 
-const sleep = time => new Promise(resolve => setTimeout(resolve, time))
+  const sleep = time => new Promise(resolve => setTimeout(resolve, time))
 
-class TypeAsync extends HTMLSpanElement {
-  get typeInterval () {
-    const randomMs = 100 * Math.random()
-    return randomMs < 50 ? 10 : randomMs
-  }
-  
-  async type (text) {
-    for (let character of text) {
-      this.innerText += character
-      await sleep(this.typeInterval)
+  class TypeAsync extends HTMLSpanElement {
+    get typeInterval () {
+      const randomMs = 100 * Math.random()
+      return randomMs < 50 ? 10 : randomMs
+    }
+    
+    async type (text) {
+      for (let character of text) {
+        this.innerText += character
+        await sleep(this.typeInterval)
+      }
+    }
+    
+    async delete (text) {
+      for (let character of text) {
+        this.innerText = this.innerText.slice(0, this.innerText.length -1)
+        await sleep(this.typeInterval)
+      }
     }
   }
-  
-  async delete (text) {
-    for (let character of text) {
-      this.innerText = this.innerText.slice(0, this.innerText.length -1)
-      await sleep(this.typeInterval)
-    }
-  }
-}
 
-customElements.define('type-async', TypeAsync, { extends: 'span' })
+  customElements.define('type-async', TypeAsync, { extends: 'span' })
 
-init()
+  init()
 
 </script>

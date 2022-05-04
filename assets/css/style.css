@@ -10248,6 +10248,11 @@ img.mfp-img {
   }
 }
 
+#services,
+#home{
+  margin: 0 50px;
+}
+
 .floating{
   position: absolute;
   width: 963px;
@@ -10263,10 +10268,6 @@ body{
 
 footer{
   background-color: #252B39;
-}
-
-.principal{
-  margin: 0 20px;
 }
 
 .principal h1{
@@ -10318,10 +10319,8 @@ footer{
   color: #02C2FF;
 }
 
-
 .card{
   color: white;
-  height:80px;
   background-color:transparent;
   margin-top: auto;
   margin-bottom: auto;
@@ -10333,8 +10332,6 @@ footer{
   margin:0;
   color: #02C2FF;
 }
-
-
 
 .card-body p{
   font-size:10px;
@@ -10373,13 +10370,22 @@ footer{
 
 
 /* services */
+.serv{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.service{
+  height: 100%;
+  margin: auto;
+
+}
 .service .card {
   border: none;
   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
   overflow: hidden;
   border-radius: 20px;
-  min-height: 300px;
-  min-width: 300px;
+  min-height: 250px;
+  min-width: 250px;
   margin: 25px;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
 }
@@ -10455,10 +10461,42 @@ footer{
   font-size: 2rem;
 }
 
-.service a{
-  font-size: 1.5rem;
+/* portfolio */
+.portfolio .card {
+  background-color: #252B39;
+  padding: 10px;
+  border: none;
+  overflow: hidden;
+  border-radius: 5px;
+  min-height: 350px;
+  min-width: 250px;
+  margin: 25px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
 }
 
-body{
-  padding: 0 50px;
+.portfolio .card-title{
+  color: white;
+  font-size: 2rem;
+}
+
+.portfolio .card-meta{
+  color: #02C2FF;
+}
+
+.service a, .portfolio a{
+  font-size: 1.5rem;
+  color: #02C2FF;
+}
+
+.portfolio{
+  width: 100%;
+  margin-left: auto;
+  margin-left: auto;
+}
+
+.about{
+  height: 300px;
+  padding: 30px;
+  color: #fff;
+  background-color: #252B39;
 }
