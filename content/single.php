@@ -59,9 +59,9 @@
 <div class="row mx-5">
 
 
-    <div class="col-9 px-5 ">
+    <div class="col-9 px-2 ">
 
-      <div class="row mx-3 service">
+      <div class="row mx-2 service">
         <?php 
         include 'services.php';
         $services_array=array_slice($services_array, 0, 6);
