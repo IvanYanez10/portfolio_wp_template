@@ -129,93 +129,80 @@
   </div>
 </div>
 
+<!-- floating image -->
+  <img class="floating" src="<?= $image ?>">
+
 <!-- portfolio -->
-<div class="col container" id="portfolio" style="height:900px;">    
-  <div class="portfolio">
+<div class="container" id="portfolio">    
+
     <h1>My best selected portfolio</h1>
-  
-  <!-- Card Start -->
-  <div class="card">
-    <div class="row">
 
-      <div class="col-md-7 px-3">
-        <div class="card-block px-6">
-          <h4 class="card-title">Top </h4>
-          <p class="card-text">
-            The Carousel code can be replaced with an img src, no problem. The added CSS brings shadow to the card and some adjustments to the prev/next buttons and the indicators is rounded now. As in Bootstrap 3
-          </p>
-          <p class="card-text">Made for usage, commonly searched for. Fork, like and use it. Just move the carousel div above the col containing the text for left alignment of images</p>
-          <br>
-          <a href="<?php $service['serviceUrl'] ?>" class="services-a">Go <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-      <!-- Carousel start -->
-      <div class="col-md-5">
-        <div id="CarouselTest" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#CarouselTest" data-slide-to="0" class="active"></li>
-            <li data-target="#CarouselTest" data-slide-to="1"></li>
-            <li data-target="#CarouselTest" data-slide-to="2"></li>
-
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="d-block" src="https://picsum.photos/450/300?image=1072" alt="">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block" src="https://picsum.photos/450/300?image=855" alt="">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block" src="https://picsum.photos/450/300?image=355" alt="">
-            </div>
-            <a class="carousel-control-prev" href="#CarouselTest" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#CarouselTest" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="col px-2 mt-4">
-
-    <div class="row portfolio">
+    <div class="">
       <?php 
-      include 'portfolio.php';
-      $portfolio_array=array_slice($portfolio_array, 0, 3);
-      foreach ( $portfolio_array as $portfolio_item ) :?>
-
-        <div class="col-md-4"><div class="card text-white card-has-bg click-col">
-          
-          <div class="card-img-overlay d-flex flex-column">
-            <div class="card-body">
-              <small class="card-meta mb-2"><?= $portfolio_item['tag'] ?></small>
-              <div class="row justify-content-between">
-                <h3 class="card-title mt-0 col-10"><?= $portfolio_item['portfolio'] ?></h3>
-                <a class="col-2" href="<?php $portfolio_item['portfolioUrl'] ?>" class="portfolio-a">Go<i class="fa-solid fa-arrow-right"></i></a>
-              </div>              
-              <img class="card-img" src="https://source.unsplash.com/600x900/?tech">
-            </div>
+        include 'portfolio.php';
+        $top_project=$portfolio_array[0];
+      ?>
+      <article class="postcard dark blue">
+        <a class="postcard__img_link" href="#">
+          <img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
+        </a>
+        <div class="postcard__text">
+          <h1 class="postcard__title blue"><a href="#"><?= $top_project['portfolio'] ?></a></h1>
+          <div class="postcard__subtitle small">
+            <p><i class="fas fa-calendar-alt mr-2"></i>  bussines</p>
           </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
+          <ul class="postcard__tagbox">
+            <li class="tag__item"><i class="fas fa-tag mr-2"></i> <?= $top_project['tag'] ?></li>
+            <li class="tag__item"><i class="fas fa-clock mr-2"></i>  15 min</li>
+            <li class="tag__item play blue">
+              <a href="#"><i class="fas fa-play mr-2"></i>  Go</a>
+            </li>
+          </ul>
         </div>
-    </div>
-
-    <?php
-    endforeach; 
-    ?>
-    </div>
+      </article>
       
-  </div>
+    </div>
 
-  </div>
+    <div class="row justify-content-around" style="margin-top:50px;">
+
+        <?php 
+        $colors=array('blue', 'red', 'green', 'yellow');
+        include 'portfolio.php';
+        $portfolio_array=array_slice($portfolio_array, 1, 3);
+        foreach ( $portfolio_array as $portfolio_item ) : $col_ind = rand(0, count($colors)-1);?>
+        
+        <article class="postcard dark postcard-item <?= $colors[$col_ind] ?>" >
+          <a class="postcard__img_link" href="#">
+            <img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
+          </a>
+          <div class="postcard__text">
+            <h1 class="postcard__title blue"><a href="#"><?= $portfolio_item['portfolio'] ?></a></h1>
+            <div class="postcard__subtitle small">
+              <p><i class="fa-solid fa-circle-notch"></i> bussines </p>
+            </div>
+            <div class="postcard__bar"></div>
+            <div class="postcard__preview-txt"><?= substr($portfolio_item['description'], 0, 80) ?></div>
+            <ul class="postcard__tagbox">
+              <li class="tag__item"><i class="fas fa-tag mr-2"></i> <?= $portfolio_item['tag'] ?></li>
+              <li class="tag__item"><i class="fas fa-clock mr-2"></i> 15min</li>
+              <li class="tag__item play blue">
+                <a href="#"><i class="fas fa-play mr-2"></i> Go</a>
+              </li>
+            </ul>
+          </div>
+        </article>          
+
+        <?php
+        endforeach; 
+        ?>
+
+    </div>
+
 </div>
 
+<!-- about -->
 <div class="container" id="about" style="height:400px;">
   <div class="row about">
       <div class="col-8">

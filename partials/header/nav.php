@@ -89,7 +89,7 @@ if ( ! empty( $template ) && ! defined( 'subetuwebWP_NAV_SHORTCODE_DONE' ) ) {
 	role="navigation" <?php echo $owp_nav_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 <ul class="nav nav-pills">
 	<?php wp_nav_menu( $menu_args ); ?>
-	<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Contacta me</a></li>	
+	<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Contact me</a></li>	
 </ul>
 
 </nav><!-- #site-navigation -->
