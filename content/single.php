@@ -215,10 +215,12 @@
 
 <!-- about -->
 <div class="container" id="about" style="height:400px;">
-  <div class="row about">
-      <div class="col-8">
-        <h1>About me</h1>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
+
+  <article class="about dark blue">
+    <div class="about__text">
+      <h1 class="about__title blue">About me</h1>
+      <div class="about__bar"></div>
+      <div class="about__preview-txt"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
         industry. Lorem Ipsum has been the industry's standard dummy text
         ever since the 1500s, when an unknown printer took a galley of type
         and scrambled it to make a type specimen book. It has survived not 
@@ -228,10 +230,9 @@
         and more recently with desktop publishing software like Aldus 
         PageMaker including versions of Lorem Ipsum.</p>
       </div>
-      <div class="col-1">
-        
-      </div>
-  </div>
+    </div>
+  </article>
+      
 </div>
 
 <script>
