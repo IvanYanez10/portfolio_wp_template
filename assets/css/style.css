@@ -10248,11 +10248,6 @@ img.mfp-img {
   }
 }
 
-#services,
-#home{
-  margin: 0 50px;
-}
-
 header{
   padding: 0 50px;
 }
@@ -10404,7 +10399,7 @@ hr {
 }
 
 footer{
-  margin-top: 10px;
+  margin-top: 50px;
   padding: 10px 0px;
 }
 
@@ -10558,6 +10553,7 @@ a, a:hover {
   font-size: 80%;
 }
 .postcard .postcard__title {
+  text-align: left;
   color: #fff;
   font-size: 1.75rem;
 }
@@ -10767,7 +10763,7 @@ a, a:hover {
 .postcard-item{
   padding: 20px;
   padding-bottom: 10px;
-  width: 30% !important;
+  /*width: 30%;*/
 }
 .postcard-item a img{
   margin-left: auto;
@@ -10793,7 +10789,6 @@ a, a:hover {
 }
 /* about */
 .about{
-  height: 300px;
   padding: 30px;
   color: #fff;
   background-color: #252B39;
@@ -10804,11 +10799,12 @@ a, a:hover {
 }
 
 /* button style by https://getcssscan.com/css-buttons-examples no.49 */
-.nav-pills .nav-link.active,
-.nav-pills .nav-link.active:after {
+.contact-btn,
+.contact-btn:after {
   width: 150px;
   height: 40px;
-  padding-left: auto;
+  padding-left:10px;
+  margin-left: 10px;
   font-size: 18px;
   font-family: 'Bebas Neue', sans-serif;
   background: linear-gradient(45deg, transparent 5%, #02C2FF 5%);
@@ -10819,7 +10815,7 @@ a, a:hover {
   position: relative;
 }
 
-.nav-pills .nav-link.active:after {
+.contact-btn:after {
   --slice-0: inset(50% 50% 50% 50%);
   --slice-1: inset(80% -6px 0 0);
   --slice-2: inset(50% -6px 30% 0);
@@ -10838,7 +10834,7 @@ a, a:hover {
   clip-path: var(--slice-0);
 }
 
-.nav-pills .nav-link.active:hover:after {
+.contact-btn:hover:after {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
 }
@@ -10891,18 +10887,18 @@ a, a:hover {
 }
 
 @media (min-width: 768px) {
-  .nav-pills .nav-link.active,
-  .nav-pills .nav-link.active:after {    
+  .contact-btn,
+  .contact-btn:after {    
     width: 150px;
     height: 40px;
   }
 }
 
-.nav-pills .nav-link.active:disabled {
+.contact-btn:disabled {
   cursor: default;
 }
 
-.nav-pills .nav-link.active:focus {
+.contact-btn:focus {
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }
 
@@ -11009,6 +11005,10 @@ a, a:hover {
   }
 
 }
+.second-item, .first-item p{
+  font-size: 1.8rem;
+}
+
 @media screen and (min-width: 1024px) {
   .about__text {
     padding: 2rem 3.5rem;
@@ -11021,8 +11021,126 @@ a, a:hover {
   .about.light .about__text:before {
     background: #e1e5ea;
   }
+
 }
+
 /* COLORS */
 .about.blue .about__bar {
   background-color: #02C2FF;
+}
+
+.principal{
+  margin: 50px 50px 120px 50px;
+}
+
+h1{
+  color: #FFF;
+  text-align: center;
+}
+
+.name-brand{
+  text-align: left;
+}
+
+header{
+  margin-top: 20px;
+}
+
+@media (max-width: 992px) {
+  .navbar-collapse {
+    border-radius: 10px;
+    background-color: #0C1526ee;
+    position: absolute;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    right: -10px;
+    top: 50px;
+    width: 250px;
+    height: 300px;
+    z-index: 2;
+    
+  }
+
+  .principal{
+    margin: 0 50px 50px 50px;
+  }
+  .services{
+    margin: 0px 50px 150px 50px;
+  }
+
+  .navbar-nav{    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-collapse.collapsing {
+      right: -300px;
+      transition: height 0s ease;
+  }
+
+  .navbar-collapse.show {
+      right: 10px;
+      transition: right 300ms ease-in-out;
+  }
+
+  .navbar-toggler.collapsed ~ .navbar-collapse {
+      transition: right 500ms ease-in-out;
+  }
+
+  .floating{
+    width: 863px;
+    height: 695px;
+    right: 0;
+  }
+  .principal{
+  margin: 0 50px 50px 50px;
+  }
+  .services{
+    margin: 0px 50px 150px 50px;
+  }
+  .second-item { 
+    height: 50px;
+  }
+  .blog-post{
+    border-style: none;
+  }
+
+}
+
+/*
+	Phone Landscape
+*/
+@media only screen and (max-width: 480px){
+  
+  .floating{
+    width: 863px;
+    height: 495px;
+    right: 0;
+  }
+  .principal{
+    margin: 0 50px 50px 50px;
+  }
+  .services{
+    margin: 0px 50px 150px 50px;
+  }
+  .second-item { 
+    height: 50px;
+  }
+  .postcard-item{
+    width: auto;
+  }
+  .blog-post{
+    border-style: none;
+  }
+  .animated{
+    font-size: 1rem;
+  }
+
+}
+
+
+.nav-link{
+  margin: 0 10px;
 }

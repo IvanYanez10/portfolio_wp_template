@@ -84,15 +84,26 @@ if ( ! empty( $template ) && ! defined( 'subetuwebWP_NAV_SHORTCODE_DONE' ) ) {
 
 <?php do_action( 'subetuweb_before_nav_inner' ); ?>
 
-<nav id="site-navigation" class="<?php echo esc_attr( $inner_classes ); ?> d-flex flex-wrap justify-content-end py-3 mb-4"
+<nav id="site-navigation" class="<?php echo esc_attr( $inner_classes ); ?> d-flex flex-wrap justify-content-end py-3 mb-4 navbar-expand-lg"
 	<?php subetuwebwp_schema_markup( 'site_navigation' ); ?> role="navigation" <?php echo $owp_nav_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	
-	<ul class="nav nav-pills">
-		<?php wp_nav_menu( $menu_args ); ?>
-		<li class="nav-item px-4"><a href="#" class="nav-link active" aria-current="page"><span>Contact me</span></a></li>	
-	</ul>
+	<a href="#" class="navbar-brand ml-auto" style="font-size:1.6rem;">Ivan</a>
+  
+	<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+		<i class="fa-solid fa-bars"></i>
+	</button>
+
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="navbar-nav ms-auto nav nav-pills">
+					<?php wp_nav_menu( $menu_args ); ?>
+					<a href="#" class="contact-btn" aria-current="page" onMouseOver="this.style.color='white'"><span>Contact me</span></a>	
+			</div>
+	</div>
+
+
 
 </nav><!-- #site-navigation -->
+
 
 <?php do_action( 'subetuweb_after_nav_inner' ); ?>
 

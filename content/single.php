@@ -6,16 +6,16 @@
 <img class="floating" src="<?= $image ?>">
 
 <!--  -->
-<div class="row principal" id="home" style="height:600px; ">
+<div class="row principal" id="home">
 
-  <div class="col-3 text-left">
-    <h1>
+  <div class="col-12 col-lg-4 col-sm-7">
+    <h1 class="row name-brand">
       I'm<br>
       <small class="">Ivan Yañez</small>
     </h1>
 
     <div class="row description">
-      <div class="col"><hr class="first"></div>      
+      <div class="col-4"><hr class="first"></div>      
       <div class="col-8 animated">
         <span is="type-async" id="type-text"></span>
         <span class="blinking-cursor">_</span>
@@ -32,16 +32,16 @@
 
   </div>
 
-  <div class="col d-flex align-items-center ">
+  <div class="col-12 col-lg-5 col-sm-5 d-flex align-items-center ">
     <img class="align-self-center bio-image" src="https://ivanyz.com/wp-content/uploads/2022/05/me-01.png" width=350 alt="pic">      
   </div>
 
-  <div class="col-3 services-col">
+  <div class="col-12 col-lg-3 services-col">
 
     <!-- replace with php code -->
-    <div class="card mb-3 first-item">
+    <div class="row card mb-3 first-item">
       <div class="row g-0">
-        <div class="col-8">
+        <div class="col">
           <div class="card-body">
             <h5 class="card-title">Servicios</h5>
             <p class="card-text">Let's build quality products in programming</p>
@@ -51,15 +51,14 @@
       </div>
     </div>
   
-    <div class="card mb-3 second-item">
+    <div class="row card second-item">
       <ul class="list-group-horizontal">
-        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-artstation"></i></a></li>
-        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
-        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-github"></i></a></li>
-        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>        
-        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-figma"></i></a></li>
-        <li class="col list-group-item"><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
+        <li class="col-lg-1 list-group-item"><a href="#"><i class="fa-brands fa-artstation"></i></a></li>
+        <li class="col-lg-1-lg-1 list-group-item"><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>        
+        <li class="col-lg-1 list-group-item"><a href="#"><i class="fa-brands fa-github"></i></a></li>
+        <li class="col-lg-1 list-group-item"><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>        
+        <li class="col-lg-1 list-group-item"><a href="#"><i class="fa-brands fa-figma"></i></a></li>
+        <li class="col-lg-1 list-group-item"><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
       </ul>
     </div>
 
@@ -68,9 +67,11 @@
 </div>
 
 <!-- services and blog -->
-<div class="row mx-5" id="services">
+<div class="row mx-5 services" id="services">
 
-    <div class="col-9 px-2 serv">
+    <div class="col-lg-8 px-2 serv">
+
+      
 
       <div class="row mx-2 service">
         <?php 
@@ -78,19 +79,20 @@
         $services_array=array_slice($services_array, 0, 6);
         foreach ( $services_array as $service ) :?>
 
-          <div class="col-md-4"><div class="card text-white card-has-bg" style="background-image:url('https://source.unsplash.com/600x900/?tech');">
-            <div class="card-img-overlay d-flex flex-column">
-              <div class="card-body">
-                <small class="card-meta mb-2"><?= $service['tag'] ?></small>
-                <h4 class="card-title mt-0 "><?= $service['service'] ?></h4>
-                <small><?= substr($service['description'], 0, 50) ?></small>
-              </div>
-              <div class="card-footer">
-                <a href="<?php $service['serviceUrl'] ?>" class="services-a">Show more <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="col">
+            <div class="card text-white card-has-bg" style="background-image:url('https://source.unsplash.com/600x900/?tech');">
+              <div class="card-img-overlay d-flex flex-column">
+                <div class="card-body">
+                  <small class="card-meta mb-2"><?= $service['tag'] ?></small>
+                  <h4 class="card-title mt-0 "><?= $service['service'] ?></h4>
+                  <small><?= substr($service['description'], 0, 50) ?></small>
+                </div>
+                <div class="card-footer">
+                  <a href="<?php $service['serviceUrl'] ?>" class="services-a">Show more <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
               </div>
             </div>
           </div>
-      </div>
 
         <?php
         endforeach; 
@@ -100,10 +102,11 @@
     </div>
 
 
-    <div class="col-3 px-5 blog-post" >
+    <div class="col-lg-4 px-5 blog-post" >
+      
       <?php
       $lastposts = get_posts( array(
-          'posts_per_page' => 6
+          'posts_per_page' => 5
       ) );
       //the_content()
       if ( $lastposts ) {
@@ -112,10 +115,10 @@
 
               <div class="card mb-3">
               <div class="row g-0">
-                <div class="col-3 align-self-center">                  
+                <div class="col-sm-3 col-lg-3 align-self-center">                  
                   <?php echo '<img src="'.get_the_post_thumbnail_url(get_the_ID(), $size = 'post-thumbnail').'" class="img-fluid rounded-start" alt="...">'; ?>
                 </div>
-                <div class="col-8">
+                <div class="col">
                   <div class="card-body">
                     <h5 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
                     <p class="card-text"><?php the_excerpt();?></p>
@@ -137,7 +140,6 @@
       }
       ?>
     </div>
-  </div>
 </div>
 
 <!-- floating image -->
@@ -184,7 +186,7 @@
         $portfolio_array=array_slice($portfolio_array, 1, 3);
         foreach ( $portfolio_array as $portfolio_item ) : $col_ind = rand(0, count($colors)-1);?>
         
-        <article class="postcard dark postcard-item <?= $colors[$col_ind] ?>" >
+        <article class="col-sm-5 col-md-5 col-lg-3  postcard dark postcard-item <?= $colors[$col_ind] ?>" >
           <a class="postcard__img_link" href="#">
             <img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
           </a>
@@ -214,7 +216,7 @@
 </div>
 
 <!-- about -->
-<div class="container" id="about" style="height:400px;">
+<div class="container" id="about">
 
   <article class="about dark blue">
     <div class="about__text">
