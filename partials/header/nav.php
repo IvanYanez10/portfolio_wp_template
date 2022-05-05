@@ -85,12 +85,12 @@ if ( ! empty( $template ) && ! defined( 'subetuwebWP_NAV_SHORTCODE_DONE' ) ) {
 <?php do_action( 'subetuweb_before_nav_inner' ); ?>
 
 <nav id="site-navigation" class="<?php echo esc_attr( $inner_classes ); ?> d-flex flex-wrap justify-content-end py-3 mb-4"
-	<?php subetuwebwp_schema_markup( 'site_navigation' ); ?> 
-	role="navigation" <?php echo $owp_nav_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-<ul class="nav nav-pills">
-	<?php wp_nav_menu( $menu_args ); ?>
-	<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Contact me</a></li>	
-</ul>
+	<?php subetuwebwp_schema_markup( 'site_navigation' ); ?> role="navigation" <?php echo $owp_nav_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+	
+	<ul class="nav nav-pills">
+		<?php wp_nav_menu( $menu_args ); ?>
+		<li class="nav-item px-4"><a href="#" class="nav-link active" aria-current="page"><span>Contact me</span></a></li>	
+	</ul>
 
 </nav><!-- #site-navigation -->
 

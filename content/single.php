@@ -1,13 +1,6 @@
+
 <!-- user can change route by customizer -->
-
-
-<?php 
-$image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png";
-/*$image_attributes = wp_get_attachment_image_src( $attachment_id = 679 );
-  if ( $image_attributes ) : 
-    $image= $image_attributes[0];
-  endif;*/
-?> 
+<?php $image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png"; ?> 
 
 <!-- floating image -->
 <img class="floating" src="<?= $image ?>">
@@ -44,7 +37,9 @@ $image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png";
   </div>
 
   <div class="col-3 services-col">
-    <div class="card mb-3">
+
+    <!-- replace with php code -->
+    <div class="card mb-3 first-item">
       <div class="row g-0">
         <div class="col-8">
           <div class="card-body">
@@ -55,6 +50,19 @@ $image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png";
         </div>
       </div>
     </div>
+  
+    <div class="card mb-3 second-item">
+      <ul class="list-group-horizontal">
+        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-artstation"></i></a></li>
+        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
+        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-github"></i></a></li>
+        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>        
+        <li class="col list-group-item"><a href="#"><i class="fa-brands fa-figma"></i></a></li>
+        <li class="col list-group-item"><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
+      </ul>
+    </div>
+
   </div>
 
 </div>
@@ -70,12 +78,11 @@ $image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png";
         $services_array=array_slice($services_array, 0, 6);
         foreach ( $services_array as $service ) :?>
 
-          <div class="col-md-4"><div class="card text-white card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech');">
-            <img class="card-img d-none" src="#">
+          <div class="col-md-4"><div class="card text-white card-has-bg" style="background-image:url('https://source.unsplash.com/600x900/?tech');">
             <div class="card-img-overlay d-flex flex-column">
               <div class="card-body">
                 <small class="card-meta mb-2"><?= $service['tag'] ?></small>
-                <h4 class="card-title mt-0 "><a class="text-white" herf="<?php $service['serviceUrl'] ?>"><?= $service['service'] ?></a></h4>
+                <h4 class="card-title mt-0 "><?= $service['service'] ?></h4>
                 <small><?= substr($service['description'], 0, 50) ?></small>
               </div>
               <div class="card-footer">
@@ -229,7 +236,7 @@ $image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png";
 
 <script>
 
-  const data = ['developer', 'fullstack', 'mobile'];
+  const data = ['developer', 'fullstack', 'mobile', '3d modeling', 'videogames', 'robotics', 'automation', 'cibersegurity', 'augmented reality', 'virtual reality', 'UI/UX'];
 
   async function init () {
 
@@ -241,7 +248,7 @@ $image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png";
     
     while (true) {      
       await node.type(data[i]);
-      await sleep(2000);
+      await sleep(1000);
       await node.delete(data[i]);
       if(i<data.length-1){              
         i++;        
