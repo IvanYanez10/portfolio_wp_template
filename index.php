@@ -17,6 +17,8 @@
 
   wp_body_open(); 
 
+  do_action( 'subetuwebwp_blog_page' );
+
   get_footer(); 
 
 ?>

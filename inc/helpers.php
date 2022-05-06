@@ -3771,6 +3771,14 @@ function subetuwebwp_body_content() {
 
 add_action( 'subetuwebwp_body_content', 'subetuwebwp_body_content' );
 
+function subetuwebwp_blog_page() {
+
+	get_template_part( 'content/blog' );
+
+}
+
+add_action( 'subetuwebwp_blog_page', 'subetuwebwp_blog_page' );
+
 function subetuwebwp_portfolio_data() {
 
 	get_template_part( 'assets/epanel/portfolio' );

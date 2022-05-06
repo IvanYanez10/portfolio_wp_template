@@ -38,8 +38,6 @@ final class subetuwebWP_Theme_Class {
 	 * @since   1.0.0
 	 */
 	public function __construct() {
-		// Migrate
-		$this->migration();
 
 		// Define theme constants.
 		$this->subetuwebwp_constants();
@@ -52,9 +50,6 @@ final class subetuwebWP_Theme_Class {
 
 		// Setup theme => add_theme_support, register_nav_menus, load_theme_textdomain, etc.
 		add_action( 'after_setup_theme', array( 'subetuwebWP_Theme_Class', 'theme_setup' ), 10 );
-
-		// Setup theme => Generate the custom CSS file.
-		add_action( 'admin_bar_init', array( 'subetuwebWP_Theme_Class', 'save_customizer_css_in_file' ), 9999 );
 		
 		// Registers theme_mod strings into Polylang.
 		if ( class_exists( 'Polylang' ) ) {
@@ -78,12 +73,6 @@ final class subetuwebWP_Theme_Class {
 			// Load theme CSS.
 			add_action( 'wp_enqueue_scripts', array( 'subetuwebWP_Theme_Class', 'theme_css' ) );
 
-			// Load his file in last.
-			add_action( 'wp_enqueue_scripts', array( 'subetuwebWP_Theme_Class', 'custom_style_css' ), 9999 );
-
-			// Remove Customizer CSS script from Front-end.
-			add_action( 'init', array( 'subetuwebWP_Theme_Class', 'remove_customizer_custom_css' ) );
-
 			// Add a pingback url auto-discovery header for singularly identifiable articles.
 			add_action( 'wp_head', array( 'subetuwebWP_Theme_Class', 'pingback_header' ), 1 );
 
@@ -102,9 +91,6 @@ final class subetuwebWP_Theme_Class {
 			// Minify the WP custom CSS because WordPress doesn't do it by default.
 			add_filter( 'wp_get_custom_css', array( 'subetuwebWP_Theme_Class', 'minify_custom_css' ) );
 
-			// Alter the search posts per page.
-			add_action( 'pre_get_posts', array( 'subetuwebWP_Theme_Class', 'search_posts_per_page' ) );
-
 			// Alter WP categories widget to display count inside a span.
 			add_filter( 'wp_list_categories', array( 'subetuwebWP_Theme_Class', 'wp_list_categories_args' ) );
 
@@ -118,21 +104,6 @@ final class subetuwebWP_Theme_Class {
 			add_filter( 'the_author_posts_link', array( 'subetuwebWP_Theme_Class', 'the_author_posts_link' ) );
 
 			add_filter( 'subetuweb_enqueue_generated_files', '__return_false' );
-		}
-	}
-
-	/**
-	 * Migration Functinality
-	 *
-	 * @since   1.0.0
-	 */
-	public static function migration() {
-		if ( get_theme_mod( 'subetuweb_disable_emoji', false ) ) {
-			set_theme_mod( 'subetuweb_performance_emoji', 'disabled' );
-		}
-
-		if ( get_theme_mod( 'subetuweb_disable_lightbox', false ) ) {
-			set_theme_mod( 'subetuweb_performance_lightbox', 'disabled' );
 		}
 	}
 
@@ -332,17 +303,8 @@ final class subetuwebWP_Theme_Class {
 			)
 		);
 
-		// Declare WooCommerce support.
-		add_theme_support( 'woocommerce' );
-		add_theme_support( 'wc-product-gallery-zoom' );
-		add_theme_support( 'wc-product-gallery-lightbox' );
-		add_theme_support( 'wc-product-gallery-slider' );
-
 		// Add editor style.
 		add_editor_style( 'assets/css/editor-style.css' );
-
-		// Declare support for selective refreshing of widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
 
 	}
 
@@ -394,7 +356,7 @@ final class subetuwebWP_Theme_Class {
 	public static function theme_css() {
 
 		// Define dir.
-		$dir           = subetuwebWP_CSS_DIR_URI;
+		$dir = subetuwebWP_CSS_DIR_URI;
 		$theme_version = subetuwebWP_THEME_VERSION;
 
 		// Remove font awesome style from plugins.
@@ -404,37 +366,9 @@ final class subetuwebWP_Theme_Class {
 		// Enqueue Main style.
 		wp_enqueue_style( 'subetuwebwp-style', $dir . 'style.css', false, $theme_version );
 
-		// Blog Header styles.
-		if ( 'default' !== get_theme_mod( 'subetuwebwp_single_post_header_style', 'default' )
-			&& is_single() && 'post' === get_post_type() ) {
-			wp_enqueue_style( 'subetuwebwp-blog-headers', $dir . 'blog/blog-post-headers.css', false, $theme_version );
-		}
+		// TODO: just display in blog page
+		wp_enqueue_style( 'subetuwebwp-blog', $dir . 'blog-style.css', false, $theme_version );
 
-		// Register perfect-scrollbar plugin style.
-		wp_register_style( 'ow-perfect-scrollbar', $dir . 'third/perfect-scrollbar.css', false, '1.5.0' );
-
-		// Register hamburgers buttons to easily use them.
-		wp_register_style( 'subetuwebwp-hamburgers', $dir . 'third/hamburgers/hamburgers.min.css', false, $theme_version );
-		// Register hamburgers buttons styles.
-		$hamburgers = subetuwebwp_hamburgers_styles();
-		foreach ( $hamburgers as $class => $name ) {
-			wp_register_style( 'subetuwebwp-' . $class . '', $dir . 'third/hamburgers/types/' . $class . '.css', false, $theme_version );
-		}
-
-		// Get mobile menu icon style.
-		$mobile_menu = get_theme_mod( 'subetuweb_mobile_menu_open_hamburger', 'default' );
-		// Enqueue mobile menu icon style.
-		if ( ! empty( $mobile_menu ) && 'default' !== $mobile_menu ) {
-			wp_enqueue_style( 'subetuwebwp-hamburgers' );
-			wp_enqueue_style( 'subetuwebwp-' . $mobile_menu . '' );
-		}
-
-		// If Vertical header style.
-		if ( 'vertical' === subetuwebwp_header_style() ) {
-			wp_enqueue_style( 'subetuwebwp-hamburgers' );
-			wp_enqueue_style( 'subetuwebwp-spin' );
-			wp_enqueue_style( 'ow-perfect-scrollbar' );
-		}
 	}
 
 	/**
@@ -454,9 +388,6 @@ final class subetuwebWP_Theme_Class {
 		// Get current theme version.
 		$theme_version = subetuwebWP_THEME_VERSION;
 
-		// Get localized array.
-		$localize_array = self::localize_array();
-
 		// Main script dependencies.
 		$main_script_dependencies = array( 'jquery' );
 
@@ -465,31 +396,6 @@ final class subetuwebWP_Theme_Class {
 			wp_enqueue_script( 'comment-reply' );
 		}
 
-		// Add images loaded.
-	//	wp_enqueue_script( 'imagesloaded' );
-
-		/**
-		 * Load Venors Scripts.
-		 */
-/*
-		// Isotop.
-		wp_register_script( 'ow-isotop', $dir . 'vendors/isotope.pkgd.min.js', array(), '3.0.6', true );
-
-		// Flickity.
-		wp_register_script( 'ow-flickity', $dir . 'vendors/flickity.pkgd.min.js', array(), $theme_version, true );
-
-		// Magnific Popup.
-		wp_register_script( 'ow-magnific-popup', $dir . 'vendors/magnific-popup.min.js', array( 'jquery' ), $theme_version, true );
-
-		// Sidr Mobile Menu.
-		wp_register_script( 'ow-sidr', $dir . 'vendors/sidr.js', array(), $theme_version, true );
-
-		// Perfect Scrollbar.
-		wp_register_script( 'ow-perfect-scrollbar', $dir . 'vendors/perfect-scrollbar.min.js', array(), $theme_version, true );
-
-		// Smooth Scroll.
-		wp_register_script( 'ow-smoothscroll', $dir . 'vendors/smoothscroll.min.js', array(), $theme_version, false );
-*/
 		/**
 		 * Load Theme Scripts.
 		 */
@@ -499,135 +405,9 @@ final class subetuwebWP_Theme_Class {
 		wp_localize_script( 'subetuwebwp-main', 'subetuwebwpLocalize', $localize_array );
 		array_push( $main_script_dependencies, 'subetuwebwp-main' );
 
-		// Blog Masonry script.
-		if ( 'masonry' === subetuwebwp_blog_grid_style() ) {
-			array_push( $main_script_dependencies, 'ow-isotop' );
-			wp_enqueue_script( 'ow-isotop' );
-			wp_enqueue_script( 'subetuwebwp-blog-masonry', $dir . 'blog-masonry.min.js', $main_script_dependencies, $theme_version, true );
-		}
-
-		// Menu script.
-		switch ( subetuwebwp_header_style() ) {
-			case 'full_screen':
-				wp_enqueue_script( 'subetuwebwp-full-screen-menu', $dir . 'full-screen-menu.min.js', $main_script_dependencies, $theme_version, true );
-				break;
-			case 'vertical':
-				array_push( $main_script_dependencies, 'ow-perfect-scrollbar' );
-				wp_enqueue_script( 'ow-perfect-scrollbar' );
-				wp_enqueue_script( 'subetuwebwp-vertical-header', $dir . 'vertical-header.min.js', $main_script_dependencies, $theme_version, true );
-				break;
-		}
-/*
-		// Mobile Menu script.
-		switch ( subetuwebwp_mobile_menu_style() ) {
-			case 'dropdown':
-				wp_enqueue_script( 'subetuwebwp-drop-down-mobile-menu', $dir . 'drop-down-mobile-menu.min.js', $main_script_dependencies, $theme_version, true );
-				break;
-			case 'fullscreen':
-				wp_enqueue_script( 'subetuwebwp-full-screen-mobile-menu', $dir . 'full-screen-mobile-menu.min.js', $main_script_dependencies, $theme_version, true );
-				break;
-			case 'sidebar':
-				array_push( $main_script_dependencies, 'ow-sidr' );
-				wp_enqueue_script( 'ow-sidr' );
-				wp_enqueue_script( 'subetuwebwp-sidebar-mobile-menu', $dir . 'sidebar-mobile-menu.min.js', $main_script_dependencies, $theme_version, true );
-				break;
-		}
-
-		// Search script.
-		switch ( subetuwebwp_menu_search_style() ) {
-			case 'drop_down':
-				wp_enqueue_script( 'subetuwebwp-drop-down-search', $dir . 'drop-down-search.min.js', $main_script_dependencies, $theme_version, true );
-				break;
-			case 'header_replace':
-				wp_enqueue_script( 'subetuwebwp-header-replace-search', $dir . 'header-replace-search.min.js', $main_script_dependencies, $theme_version, true );
-				break;
-			case 'overlay':
-				wp_enqueue_script( 'subetuwebwp-overlay-search', $dir . 'overlay-search.min.js', $main_script_dependencies, $theme_version, true );
-				break;
-		}
-
-		// Mobile Search Icon Style.
-		if ( subetuwebwp_mobile_menu_search_style() !== 'disabled' ) {
-			wp_enqueue_script( 'subetuwebwp-mobile-search-icon', $dir . 'mobile-search-icon.min.js', $main_script_dependencies, $theme_version, true );
-		}
-
-		// Equal Height Elements script.
-		if ( subetuwebwp_blog_entry_equal_heights() ) {
-			wp_enqueue_script( 'subetuwebwp-equal-height-elements', $dir . 'equal-height-elements.min.js', $main_script_dependencies, $theme_version, true );
-		}
-
-		// Lightbox script.
-		if ( subetuwebwp_gallery_is_lightbox_enabled() || get_theme_mod( 'subetuweb_performance_lightbox', 'enabled' ) === 'enabled' ) {
-			array_push( $main_script_dependencies, 'ow-magnific-popup' );
-			wp_enqueue_script( 'ow-magnific-popup' );
-			wp_enqueue_script( 'subetuwebwp-lightbox', $dir . 'ow-lightbox.min.js', $main_script_dependencies, $theme_version, true );
-		}
-
-		// Slider script.
-		array_push( $main_script_dependencies, 'ow-flickity' );
-		wp_enqueue_script( 'ow-flickity' );
-		wp_enqueue_script( 'subetuwebwp-slider', $dir . 'ow-slider.min.js', $main_script_dependencies, $theme_version, true );
-
-		// Scroll Effect script.
-		wp_enqueue_script( 'subetuwebwp-scroll-effect', $dir . 'scroll-effect.min.js', $main_script_dependencies, $theme_version, true );
-
-		// Scroll to Top script.
-		if ( subetuwebwp_display_scroll_up_button() ) {
-			wp_enqueue_script( 'subetuwebwp-scroll-top', $dir . 'scroll-top.min.js', $main_script_dependencies, $theme_version, true );
-		}
-
-		// Custom Select script.
-		if ( get_theme_mod( 'subetuweb_performance_custom_select', 'enabled' ) === 'enabled' ) {
-			wp_enqueue_script( 'subetuwebwp-select', $dir . 'select.min.js', $main_script_dependencies, $theme_version, true );
-		}
-
-		// Infinite Scroll script.
-		if ( 'infinite_scroll' === get_theme_mod( 'subetuweb_blog_pagination_style', 'standard' ) || 'infinite_scroll' === get_theme_mod( 'subetuweb_woo_pagination_style', 'standard' ) ) {
-			wp_enqueue_script( 'subetuwebwp-infinite-scroll', $dir . 'ow-infinite-scroll.min.js', $main_script_dependencies, $theme_version, true );
-		}
-*/
-		// WooCommerce scripts.
-		if ( subetuwebWP_WOOCOMMERCE_ACTIVE
-		&& 'yes' !== get_theme_mod( 'subetuweb_woo_remove_custom_features', 'no' ) ) {
-			wp_enqueue_script( 'subetuwebwp-woocommerce-custom-features', $dir . 'wp-plugins/woocommerce/woo-custom-features.min.js', array( 'jquery' ), $theme_version, true );
-			wp_localize_script( 'subetuwebwp-woocommerce-custom-features', 'subetuwebwpLocalize', $localize_array );
-		}
-
 		// Register scripts for old addons.
 		wp_register_script( 'nicescroll', $dir . 'vendors/support-old-subetuwebwp-addons/jquery.nicescroll.min.js', array( 'jquery' ), $theme_version, true );
-	}
 
-	/**
-	 * Functions.js localize array
-	 *
-	 * @since 1.0.0
-	 */
-	public static function localize_array() {
-
-		// Create array.
-		$sidr_side   = get_theme_mod( 'subetuweb_mobile_menu_sidr_direction', 'left' );
-		$sidr_side   = $sidr_side ? $sidr_side : 'left';
-		$sidr_target = get_theme_mod( 'subetuweb_mobile_menu_sidr_dropdown_target', 'link' );
-		$sidr_target = $sidr_target ? $sidr_target : 'link';
-		$vh_target   = get_theme_mod( 'subetuweb_vertical_header_dropdown_target', 'link' );
-		$vh_target   = $vh_target ? $vh_target : 'link';
-		$array       = array(
-			'nonce'                 => wp_create_nonce( 'subetuwebwp' ),
-			'isRTL'                 => is_rtl(),
-			'sidrDisplace'          => get_theme_mod( 'subetuweb_mobile_menu_sidr_displace', true ) ? true : false,
-			'sidrSide'              => $sidr_side,
-			'sidrDropdownTarget'    => $sidr_target,
-			'verticalHeaderTarget'  => $vh_target,
-			'customSelects'         => '.woocommerce-ordering .orderby, #dropdown_product_cat, .widget_categories select, .widget_archive select, .single-product .variations_form .variations select',
-		);
-
-		// WooCart.
-		if ( subetuwebWP_WOOCOMMERCE_ACTIVE ) {
-			$array['wooCartStyle'] = subetuwebwp_menu_cart_style();
-		}
-
-		// Apply filters and return array.
-		return apply_filters( 'subetuweb_localize_array', $array );
 	}
 
 	/**
@@ -651,8 +431,6 @@ final class subetuwebWP_Theme_Class {
 		wp_enqueue_script( 'html5shiv' );
 		wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
 	}
-
-
 
 	/**
 	 * Registers theme_mod strings into Polylang.
@@ -717,117 +495,12 @@ final class subetuwebWP_Theme_Class {
 	}
 
 	/**
-	 * Save Customizer CSS in a file
-	 *
-	 * @param obj $output output value.
-	 * @since 1.4.12
-	 */
-	public static function save_customizer_css_in_file( $output = null ) {
-
-		// If Custom File is not selected.
-		if ( 'file' !== get_theme_mod( 'subetuweb_customzer_styling', 'head' ) ) {
-			return;
-		}
-
-		// Get all the customier css.
-		$output = apply_filters( 'subetuweb_head_css', $output );
-
-		// Get Custom Panel CSS.
-		$output_custom_css = wp_get_custom_css();
-
-		// Minified the Custom CSS.
-		$output .= subetuwebwp_minify_css( $output_custom_css );
-
-		// We will probably need to load this file.
-		require_once ABSPATH . 'wp-admin' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'file.php';
-
-		global $wp_filesystem;
-		$upload_dir = wp_upload_dir(); // Grab uploads folder array.
-		$dir        = trailingslashit( $upload_dir['basedir'] ) . 'subetuwebwp' . DIRECTORY_SEPARATOR; // Set storage directory path.
-
-		WP_Filesystem(); // Initial WP file system.
-		$wp_filesystem->mkdir( $dir ); // Make a new folder 'subetuwebwp' for storing our file if not created already.
-		$wp_filesystem->put_contents( $dir . 'custom-style.css', $output, 0644 ); // Store in the file.
-
-	}
-
-	/**
-	 * Include Custom CSS file if present.
-	 *
-	 * @param obj $output output value.
-	 * @since 1.4.12
-	 */
-	public static function custom_style_css( $output = null ) {
-
-		// If Custom File is not selected.
-		if ( 'file' !== get_theme_mod( 'subetuweb_customzer_styling', 'head' ) ) {
-			return;
-		}
-
-		global $wp_customize;
-		$upload_dir = wp_upload_dir();
-
-		// Get all the customier css.
-		$output = apply_filters( 'subetuweb_head_css', $output );
-
-		// Get Custom Panel CSS.
-		$output_custom_css = wp_get_custom_css();
-
-		// Minified the Custom CSS.
-		$output .= subetuwebwp_minify_css( $output_custom_css );
-
-		// Render CSS from the custom file.
-		if ( ! isset( $wp_customize ) && file_exists( $upload_dir['basedir'] . '/subetuwebwp/custom-style.css' ) && ! empty( $output ) ) {
-			wp_enqueue_style( 'subetuwebwp-custom', trailingslashit( $upload_dir['baseurl'] ) . 'subetuwebwp/custom-style.css', false, false );
-		}
-	}
-
-	/**
-	 * Remove Customizer style script from front-end
-	 *
-	 * @since 1.4.12
-	 */
-	public static function remove_customizer_custom_css() {
-
-		// If Custom File is not selected.
-		if ( 'file' !== get_theme_mod( 'subetuweb_customzer_styling', 'head' ) ) {
-			return;
-		}
-
-		global $wp_customize;
-
-		// Disable Custom CSS in the frontend head.
-		remove_action( 'wp_head', 'wp_custom_css_cb', 11 );
-		remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
-
-		// If custom CSS file exists and NOT in customizer screen.
-		if ( isset( $wp_customize ) ) {
-			add_action( 'wp_footer', 'wp_custom_css_cb', 9999 );
-		}
-	}
-
-	/**
 	 * Adds inline CSS for the admin
 	 *
 	 * @since 1.0.0
 	 */
 	public static function admin_inline_css() {
 		echo '<style>div#setting-error-tgmpa{display:block;}</style>';
-	}
-
-	/**
-	 * Alter the search posts per page
-	 *
-	 * @param obj $query query.
-	 * @since 1.3.7
-	 */
-	public static function search_posts_per_page( $query ) {
-		$posts_per_page = get_theme_mod( 'subetuweb_search_post_per_page', '8' );
-		$posts_per_page = $posts_per_page ? $posts_per_page : '8';
-
-		if ( $query->is_main_query() && is_search() ) {
-			$query->set( 'posts_per_page', $posts_per_page );
-		}
 	}
 
 	/**
@@ -953,15 +626,6 @@ final class subetuwebWP_Theme_Class {
 		// Return link.
 		return $link;
 
-	}
-
-	/**
-	 * Add schema markup to the authors post link
-	 *
-	 * @since 1.1.5
-	 */
-	public static function remove_bb_lightbox() {
-		return true;
 	}
 
 }
