@@ -16,8 +16,8 @@ if ( 'quote' === get_post_format() ) {
 }
 
 // Heading tag.
-$heading = get_theme_mod( 'subetuweb_single_post_heading_tag', 'h2' );
-$heading = $heading ? $heading : 'h2';
+$heading = get_theme_mod( 'subetuweb_single_post_heading_tag', 'h1' );
+$heading = $heading ? $heading : 'h1';
 $heading = apply_filters( 'subetuweb_single_post_heading', $heading );
 
 ?>
@@ -26,6 +26,6 @@ $heading = apply_filters( 'subetuweb_single_post_heading', $heading );
 
 <header class="entry-header clr">
 	<<?php echo esc_attr( $heading ); ?> class="single-post-title entry-title"<?php subetuwebwp_schema_markup( 'headline' ); ?>><?php the_title(); ?></<?php echo esc_attr( $heading ); ?>><!-- .single-post-title -->
-</header><!-- .entry-header -->
+	</header><!-- .entry-header -->
 
 <?php do_action( 'subetuweb_after_single_post_title' ); ?>

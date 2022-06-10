@@ -16,7 +16,7 @@ if ( 'post' !== get_post_type() ) {
 }
 
 // Number of columns for entries.
-$subetuwebwp_columns = apply_filters( 'subetuweb_related_blog_posts_columns', absint( get_theme_mod( 'subetuweb_blog_related_columns', '3' ) ) );
+$subetuwebwp_columns = apply_filters( 'subetuweb_related_blog_posts_columns', absint( get_theme_mod( 'subetuweb_blog_related_columns', '4' ) ) );
 
 // Term.
 $term_tax = get_theme_mod( 'subetuweb_blog_related_taxonomy', 'category' );

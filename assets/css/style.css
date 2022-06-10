@@ -239,7 +239,7 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
   line-height: 1.8;
-  color: #4a4a4a;
+  color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-wrap: break-word;
@@ -929,16 +929,6 @@ th {
 .landing-page #main #content-wrap {
   padding-top: 0;
   padding-bottom: 0;
-}
-
-.content-area {
-  float: left;
-  position: relative;
-  width: 72%;
-  padding-right: 30px;
-  border-right-width: 1px;
-  border-style: solid;
-  border-color: #f1f1f1;
 }
 
 .widget-area {
@@ -1789,7 +1779,7 @@ h5,
 h6 {
   font-weight: 600;
   margin: 0 0 20px;
-  color: #333;
+  color: #fff;
   line-height: 1.4;
 }
 
@@ -10249,7 +10239,7 @@ img.mfp-img {
 }
 
 header{
-  padding: 0 50px;
+  padding: 0;
 }
 
 .floating{
@@ -11035,7 +11025,8 @@ a, a:hover {
 
 h1{
   color: #FFF;
-  text-align: center;
+  text-align: left;
+  font-size: 3em;
 }
 
 .name-brand{
@@ -11143,4 +11134,22 @@ header{
 
 .nav-link{
   margin: 0 10px;
+}
+
+/* blog post singular */
+.post-tags{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 100; line-height: 26.4px;  
+  width: min-content;
+}
+.post-tags a{
+  color: #fff;
+  height: 5px !important;
+}
+.post-tags hr{
+  margin: 2px 0;
+  height: 5px !important;
+}
+
+.thumbnail img{
+  margin: 50px 0;
 }

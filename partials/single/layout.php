@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <article id="post-<?php the_ID(); ?>">
-	to edit
 	<?php
 	// Get posts format.
 	$format = get_post_format();
@@ -21,83 +20,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 	// Get elements.
 	$elements = subetuwebwp_blog_single_elements_positioning();
 
-	// Loop through elements.
-	foreach ( $elements as $element ) {
+	// Tags.
+	get_template_part( 'partials/single/tags' );
 
-		// Featured Image.
-		if ( 'featured_image' === $element
-			&& ! post_password_required() ) {
+	// Title.
+	get_template_part( 'partials/single/header' );
 
-			$format = $format ? $format : 'thumbnail';
+	// Meta.
+	get_template_part( 'partials/single/meta' );
 
-			get_template_part( 'partials/single/media/blog-single', $format );
+	// Featured Image.
+	$format = $format ? $format : 'thumbnail';
+	get_template_part( 'partials/single/media/blog-single', $format );	
 
-		}
+	// Content.
+	get_template_part( 'partials/single/content' );
 
-		// Title.
-		if ( 'title' === $element ) {
+	// Next/Prev.
+	ob_start();
+	get_template_part( 'partials/single/next-prev' );
+	echo ob_get_clean();
 
-			get_template_part( 'partials/single/header' );
+	// Related Posts.
+	ob_start();
+	get_template_part( 'partials/single/related-posts' );
+	echo ob_get_clean();
 
-		}
-
-		// Meta.
-		if ( 'meta' === $element ) {
-
-			get_template_part( 'partials/single/meta' );
-
-		}
-
-		// Content.
-		if ( 'content' === $element ) {
-
-			get_template_part( 'partials/single/content' );
-
-		}
-
-		// Tags.
-		if ( 'tags' === $element ) {
-
-			get_template_part( 'partials/single/tags' );
-
-		}
-
-		// Social Share.
-		if ( 'social_share' === $element
-			&& subetuweb_EXTRA_ACTIVE ) {
-
-			do_action( 'subetuweb_social_share' );
-
-		}
-
-		// Next/Prev.
-		if ( 'next_prev' === $element ) {
-			ob_start();
-			get_template_part( 'partials/single/next-prev' );
-			echo ob_get_clean();
-		}
-
-		// Author Box.
-		if ( 'author_box' === $element ) {
-
-			get_template_part( 'partials/single/author-bio' );
-
-		}
-
-		// Related Posts.
-		if ( 'related_posts' === $element ) {
-			ob_start();
-			get_template_part( 'partials/single/related-posts' );
-			echo ob_get_clean();
-		}
-
-		// Comments.
-		if ( 'single_comments' === $element ) {
-			ob_start();
-			comments_template();
-			echo ob_get_clean();
-		}
-	}
 	?>
 
 </article>

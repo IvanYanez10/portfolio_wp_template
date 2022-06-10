@@ -87,7 +87,7 @@ if ( ! empty( $template ) && ! defined( 'subetuwebWP_NAV_SHORTCODE_DONE' ) ) {
 <nav id="site-navigation" class="<?php echo esc_attr( $inner_classes ); ?> d-flex flex-wrap justify-content-end py-3 mb-4 navbar-expand-lg"
 	<?php subetuwebwp_schema_markup( 'site_navigation' ); ?> role="navigation" <?php echo $owp_nav_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	
-	<a href="#" class="navbar-brand ml-auto" style="font-size:1.6rem;">Ivan</a>
+	<a href="#" class="navbar-brand ml-auto" style="font-size:1.6rem;" hidden>Ivan</a>
   
 	<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
 		<i class="fa-solid fa-bars"></i>
