@@ -1,0 +1,32 @@
+.course{
+  width: 350px;
+  background-color: rgb(32,33,36);
+  margin: 20px;
+  border-radius: 10px;
+  border: solid #585b63 0.5px;
+}
+.card__header{
+  width: 70px;
+  display: inline-block;
+}
+.counter{
+  background-color: rgb(55, 64, 255);
+  border-radius: 10px;
+  width: 60px;
+  display: inline-block;
+}
+.banners{
+  height: 600px;
+}
+.bann{
+  height: 100%;  
+  background-color: #585b63;
+}
+.banners .row{
+  height: 280px;
+  background-color: #585b63;
+}
+.banners div{  
+  margin: 20px;
+  border-radius: 15px;
+}
