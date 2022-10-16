@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<?php wp_head(); ?>
-	<link rel="stylesheet" href="http://localhost/wp-testing/wp-content/themes/portfolio-theme/assets/css/tutorial-style.css">
+	<link rel="stylesheet" href="https://ivanyz.com/wp-content/themes/portfolio-theme/assets/css/tutorial-style.css">
 </head>
 
 <body>

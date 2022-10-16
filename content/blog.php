@@ -1,5 +1,5 @@
 <!-- TODO: make change route by customizer -->
-<?php $image= "https://ivanyz.com/wp-content/uploads/2022/05/background.png"; ?> 
+<?php $image= "https://ivanyz.com/wp-content/uploads/2022/10/background.png"; ?> 
 
 <!-- floating image -->
 <img class="floating" src="<?= $image ?>">

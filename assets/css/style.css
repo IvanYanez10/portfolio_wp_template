@@ -10963,6 +10963,24 @@ a, a:hover {
   width: 100%;
 }
 
+/* services dropdown */
+.services-item .sub-menu {
+  clear:both;
+  overflow: hidden;
+  position: absolute;
+  display: none;
+  text-align: left;
+  color: white;
+  border-radius: 10px;
+  background-color: #070e1ae8; /*0C1526ee*/
+  margin: 0;
+  z-index: 2;
+}
+.services-item:hover .sub-menu{
+  visibility: visible;
+  display: block;      
+}
+
 @media screen and (min-width: 769px) {
   .about {
     flex-wrap: inherit;
@@ -10995,6 +11013,7 @@ a, a:hover {
   }
 
 }
+
 .second-item, .first-item p{
   font-size: 1.8rem;
 }
@@ -11049,8 +11068,7 @@ header{
     top: 50px;
     width: 250px;
     height: 300px;
-    z-index: 2;
-    
+    z-index: 2;  
   }
 
   .principal{
@@ -11067,17 +11085,17 @@ header{
   }
 
   .navbar-collapse.collapsing {
-      right: -300px;
-      transition: height 0s ease;
+    right: -300px;
+    transition: height 0s ease;
   }
 
   .navbar-collapse.show {
-      right: 10px;
-      transition: right 300ms ease-in-out;
+    right: 10px;
+    transition: right 300ms ease-in-out;
   }
 
   .navbar-toggler.collapsed ~ .navbar-collapse {
-      transition: right 500ms ease-in-out;
+    transition: right 500ms ease-in-out;
   }
 
   .floating{
@@ -11086,7 +11104,7 @@ header{
     right: 0;
   }
   .principal{
-  margin: 0 50px 50px 50px;
+    margin: 0 50px 50px 50px;
   }
   .services{
     margin: 0px 50px 150px 50px;
@@ -11096,6 +11114,10 @@ header{
   }
   .blog-post{
     border-style: none;
+  }
+
+  .services-item:hover .sub-menu{
+    display: none;      
   }
 
 }
@@ -11129,6 +11151,10 @@ header{
     font-size: 1rem;
   }
 
+  .services-item:hover .sub-menu{
+    display: none;      
+  }
+
 }
 
 
@@ -11156,3 +11182,4 @@ header{
 .thumbnail img{
   margin: 50px 0;
 }
+

@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<?php wp_head(); ?>
-	<link rel="stylesheet" href="http://localhost/wp-testing/wp-content/themes/portfolio-theme/assets/css/tutorials-style.css">
+	<link rel="stylesheet" href="https://ivanyz.com/wp-content/themes/portfolio-theme/assets/css/tutorials-style.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 		for($i = 1; $i <= 4; $i++) { ?>
 
 		<div class="course col-4">
-			<a class="card" data-style="branded" href="http://localhost/wp-testing/tutorials/some-tutorial/"> 
+			<a class="card" data-style="branded" href="https://ivanyz.com/tutorials/some-tutorial/"> 
 				<div class="card__header repel"><p class="color-mid-text">Course</p>
 					<div class="counter t-bg-core-primary t-color-shades-light-bright">
 						<span aria-label="25 recursos" class="counter__content">25</span>
